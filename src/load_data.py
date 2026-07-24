@@ -6,8 +6,8 @@ from i18n import translate
 def load_data(file_path: str) -> tuple[pd.DataFrame, pd.DataFrame]:
     print(translate("load.info", path=file_path))
 
-    lessons_df = pd.read_excel(file_path, sheet_name="Lessons")  # type: ignore
-    teachers_df = pd.read_excel(file_path, sheet_name="Teachers")  # type: ignore
+    lessons_df = pd.read_excel(file_path, sheet_name="Lessons")
+    teachers_df = pd.read_excel(file_path, sheet_name="Teachers")
 
     lessons_df.columns = lessons_df.columns.str.strip()
     teachers_df.columns = teachers_df.columns.str.strip()
