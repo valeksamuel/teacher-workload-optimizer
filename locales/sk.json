@@ -1,5 +1,15 @@
 {
     "load.info": "📂 Načítavam: {path}",
     "lessons.info": "Hodiny: {len(lessons_df)} záznamov",
-    "teachers.info": "Učitelia: {len(teachers_df)} záznamov"
+    "teachers.info": "Učitelia: {len(teachers_df)} záznamov",
+    "cli.description": "Optimalizátor úväzkov učiteľov",
+    "cli.input.help": "Vstupný Excel súbor (default: input.xlsx)",
+    "cli.output.help": "Výstupný Excel súbor (default: output.xlsx)",
+    "cli.time.help": "Časový limit v sekundách (default: 120)",
+    "cli.workers.help": "Počet vlákien procesora, ktorý bude solver používať (default: 8)",
+    "initial.message.top": "╔══════════════════════════════════════════════════════════╗",
+    "initial.message.mid": "║   OPTIMALIZÁCIA ÚVÄZKOV UČITEĽOV (dvojfázová / CP-SAT)   ║",
+    "initial.message.bottom": "╚══════════════════════════════════════════════════════════╝",
+    "excel.sheet.lessons": "Hodiny",
+    "excel.sheet.teachers": "Učitelia"
 }
