@@ -1,6 +1,8 @@
 import argparse
 
+from builders import build_eligibility, build_lessons, build_teachers
 from i18n import translate
+from loader import load_data
 
 
 def main() -> None:
@@ -22,6 +24,11 @@ def main() -> None:
     print(translate("initial.message.top"))
     print(translate("initial.message.mid"))
     print(translate("initial.message.bottom"))
+
+    lessons_df, teachers_df = load_data(args.input)
+    lessons = build_lessons(lessons_df)
+    teachers = build_teachers(teachers_df)
+    eligibility = build_eligibility(lessons, teachers)
 
 
 if __name__ == "__main__":
