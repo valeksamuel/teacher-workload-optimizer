@@ -1,0 +1,20 @@
+from i18n import translate
+
+COL_LESSON_ID = translate("excel.col.lesson.id")
+COL_CLASS_NAME = translate("excel.col.class.name")
+COL_LESSON_NAME = translate("excel.col.lesson.name")
+COL_LESSON_WEEKLY_LOAD = translate("excel.col.lesson.weekly.load")
+COL_LESSON_WEEK = translate("excel.col.lesson.week")
+COL_SUBJECT_TEACHER = translate("excel.col.subject.teacher")
+COL_TEACHER_ID = translate("excel.col.teacher.id")
+COL_TEACHER_NAME = translate("excel.col.teacher.name")
+COL_TEACHER_MIN_2WEEKS_WORKLOAD = translate("excel.col.min.2week.workload")
+COL_TEACHER_TARGET_2WEEKS_WORKLOAD = translate("excel.col.target.2week.workload")
+COL_TEACHER_MAX_2WEEKS_WORKLOAD = translate("excel.col.max.2week.workload")
+INFO_COLS = {
+    COL_TEACHER_ID,
+    COL_TEACHER_NAME,
+    COL_TEACHER_MIN_2WEEKS_WORKLOAD,
+    COL_TEACHER_TARGET_2WEEKS_WORKLOAD,
+    COL_TEACHER_MAX_2WEEKS_WORKLOAD,
+}

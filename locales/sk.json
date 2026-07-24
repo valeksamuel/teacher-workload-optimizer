@@ -11,5 +11,16 @@
     "initial.message.mid": "║   OPTIMALIZÁCIA ÚVÄZKOV UČITEĽOV (dvojfázová / CP-SAT)   ║",
     "initial.message.bottom": "╚══════════════════════════════════════════════════════════╝",
     "excel.sheet.lessons": "Hodiny",
-    "excel.sheet.teachers": "Učitelia"
+    "excel.sheet.teachers": "Učitelia",
+    "excel.col.lesson.id": "ID",
+    "excel.col.class.name": "Názov",
+    "excel.col.lesson.name": "Predmet",
+    "excel.col.2week.hours": "Dotácia za 2 týždne",
+    "excel.col.lesson.week": "Týždeň",
+    "excel.col.lesson.teacher": "Učiteľ",
+    "excel.col.teacher.id": "ID",
+    "excel.col.teacher.name": "Meno a priezvisko",
+    "excel.col.min.2week.workload": "Min úväzok (2 týždňový)",
+    "excel.col.target.2week.workload": "Cieľový úväzok (2 týždňový)",
+    "excel.col.max.2week.workload": "Max úväzok (2 týždňový)"
 }

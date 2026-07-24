@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
 
 
-@dataclass(slots=True)
+@dataclass(slots=True, kw_only=True)
 class Lesson:
+    # TODO in check_data: Check if all IDs have correct format
     id: str
     name: str
     class_name: str
@@ -10,8 +11,12 @@ class Lesson:
     week: str
     assigned_teacher: Teacher | None = None
 
+    @property
+    def get_subject_abbreviation(self) -> str:
+        return self.id.split("-")[1]
 
-@dataclass(slots=True)
+
+@dataclass(slots=True, kw_only=True)
 class Teacher:
     id: str
     name: str
@@ -19,3 +24,6 @@ class Teacher:
     target_two_week_workload: int
     max_two_week_workload: int
     subject_qualifications: set[str] = field(default_factory=set)
+
+    def is_qualified_for(self, subject: str) -> bool:
+        return subject in self.subject_qualifications

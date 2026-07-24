@@ -1,0 +1,65 @@
+import pandas as pd
+
+import constants as c
+from models import Lesson, Teacher
+
+
+def build_teachers(teachers_df: pd.DataFrame) -> list[Teacher]:
+    # TODO in check_data: Check if any cell in teachers_df is empty (pd.notna)
+    # TODO in check_data: Check if any teacher has negative values
+
+    subject_cols = [col for col in teachers_df.columns if col not in c.INFO_COLS]
+
+    teachers: list[Teacher] = []
+    for _, row in teachers_df.iterrows():
+        qualifications = {
+            subject for subject in subject_cols if subject in row and bool(row[subject])
+        }
+
+        teachers.append(
+            Teacher(
+                id=row[c.COL_TEACHER_ID],
+                name=row[c.COL_TEACHER_NAME],
+                min_two_week_workload=int(row[c.COL_TEACHER_MIN_2WEEKS_WORKLOAD]),
+                target_two_week_workload=int(row[c.COL_TEACHER_TARGET_2WEEKS_WORKLOAD]),
+                max_two_week_workload=int(row[c.COL_TEACHER_MAX_2WEEKS_WORKLOAD]),
+                subject_qualifications=qualifications,
+            )
+        )
+
+    return teachers
+
+
+def build_lessons(lessons_df: pd.DataFrame) -> list[Lesson]:
+    lessons: list[Lesson] = []
+    for _, row in lessons_df.iterrows():
+        fixed_teacher = row[c.COL_SUBJECT_TEACHER]
+
+        lessons.append(
+            Lesson(
+                id=row[c.COL_LESSON_ID],
+                class_name=row[c.COL_CLASS_NAME],
+                name=row[c.COL_LESSON_NAME],
+                two_week_hours=row[c.COL_LESSON_WEEKLY_LOAD],
+                week=row[c.COL_LESSON_WEEK],
+                assigned_teacher=fixed_teacher if pd.notna(fixed_teacher) else None,
+            )
+        )
+
+    return lessons
+
+
+def build_eligibility(
+    lessons: list[Lesson], teachers: list[Teacher]
+) -> dict[str, list[str]]:
+    # TODO in check_data: Check if any lesson has no eligible teacher
+    eligibility: dict[str, list[str]] = {}
+    for lesson in lessons:
+        eligible = [
+            teacher.name
+            for teacher in teachers
+            if teacher.is_qualified_for(lesson.get_subject_abbreviation)
+        ]
+        eligibility[lesson.id] = eligible
+
+    return eligibility
