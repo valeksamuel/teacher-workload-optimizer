@@ -1,0 +1,5 @@
+{
+    "load.info": "📂 Načítavam: {path}",
+    "lessons.info": "Hodiny: {len(lessons_df)} záznamov",
+    "teachers.info": "Učitelia: {len(teachers_df)} záznamov"
+}

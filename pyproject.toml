@@ -4,7 +4,10 @@ version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.14"
-dependencies = []
+dependencies = [
+    "openpyxl>=3.1.5",
+    "pandas>=3.0.5",
+]
 
 [tool.ruff]
 line-length = 88
@@ -35,3 +38,8 @@ skip-magic-trailing-comma = false
 line-ending = "auto"
 docstring-code-format = true
 docstring-code-line-length = "dynamic"
+
+[dependency-groups]
+dev = [
+    "pandas-stubs>=3.0.3.260530",
+]
