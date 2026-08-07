@@ -22,5 +22,7 @@
     "excel.col.teacher.name": "Meno a priezvisko",
     "excel.col.min.2week.workload": "Min úväzok (2 týždňový)",
     "excel.col.target.2week.workload": "Cieľový úväzok (2 týždňový)",
-    "excel.col.max.2week.workload": "Max úväzok (2 týždňový)"
+    "excel.col.max.2week.workload": "Max úväzok (2 týždňový)",
+    "constraints.infeasible.lessons": "{len(infeasible)} hodín bez premennej - model môže byť neriešiteľný!",
+    "constraints.infeasible.lessons.list": "Problémové ID hodín: {infeasible}"
 }
