@@ -18,3 +18,6 @@ INFO_COLS = {
     COL_TEACHER_TARGET_2WEEKS_WORKLOAD,
     COL_TEACHER_MAX_2WEEKS_WORKLOAD,
 }
+WEEK_TYPE_EVEN = translate("week.type.even")
+WEEK_TYPE_ODD = translate("week.type.odd")
+WEEK_TYPE_EVERY = translate("week.type.every")

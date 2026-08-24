@@ -25,5 +25,18 @@
     "excel.col.max.2week.workload": "Max úväzok (2 týždňový)",
     "constraints.infeasible.lessons": "{count_infeasible} hodín bez premennej - model môže byť neriešiteľný!",
     "constraints.infeasible.lessons.list": "Problémové ID hodín: {lessons_infeasible}",
-    "constraints.fixed.assignment.not.valid": "Neplatné pevné priradenie: {lesson_id} → {teacher_id} (učiteľ nemá aprobáciu alebo neexistuje)."
+    "constraints.fixed.assignment.not.valid": "Neplatné pevné priradenie: {lesson_id} → {teacher_id} (učiteľ nemá aprobáciu alebo neexistuje).",
+    "week.type.even": "Párny týždeň",
+    "week.type.odd": "Nepárny týždeň",
+    "week.type.every": "Každý týždeň",
+    "solver.phase.start": "Riešim {phase} (max. {time_limit}s, {num_workers} vlákien)…",
+    "solver.optimal.solution": "-> Riešenie: OPTIMÁLNE",
+    "solver.feasible.solution": "-> Riešenie: PRÍPUSTNÉ (nie optimálne)",
+    "solver.no.solution": "-> Riešenie: NENÁJDENÉ (status: {status})",
+    "phase1.start": "FÁZA 1 - Optimalizácia celkového úväzku",
+    "phase1.complete": "Celková odchýlka od cieľa: {obj_value} hodín",
+    "phase2.start": "FÁZA 2 - Minimalizácia rozdielu párnych/nepárnych týždňov",
+    "phase2.complete": "Celková nerovnováha párneho/nepárneho týždňa: {obj_value} hodín",
+    "phase1.infeasible": "Fáza 1 nenašla riešenie. Program sa ukončuje.",
+    "phase2.infeasible": "Fáza 2 nenašla riešenie - použijem výsledky fázy 1."
 }

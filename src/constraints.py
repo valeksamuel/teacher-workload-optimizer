@@ -4,7 +4,7 @@ from i18n import translate
 from models import Lesson, Teacher
 
 
-def one_teacher_per_lesson(
+def add_one_teacher_per_lesson(
     model: cp_model.CpModel,
     assignment_vars: dict[tuple[str, str], cp_model.BoolVar],
     lessons: list[Lesson],
@@ -38,7 +38,7 @@ def one_teacher_per_lesson(
         )
 
 
-def fixed_assignments(
+def add_fixed_assignments(
     model: cp_model.CpModel,
     assignment_vars: dict[tuple[str, str], cp_model.BoolVar],
     lessons: list[Lesson],
@@ -60,14 +60,13 @@ def fixed_assignments(
                 )
 
 
-def workload_limits(
+def add_workload_limits(
     model: cp_model.CpModel,
     lessons: list[Lesson],
     teachers: list[Teacher],
     assignment_vars: dict[tuple[str, str], cp_model.BoolVar],
-) -> dict[str, cp_model.IntVar]:
+) -> None:
     """Constraint: min and max workload limits."""
-    workloads = {}
     for teacher in teachers:
         terms = []
         for lesson in lessons:
@@ -83,10 +82,8 @@ def workload_limits(
         )
 
         model.add(var == sum(terms) if terms else 0)
-        workloads[teacher.id] = var
+        teacher.workload_var = var
 
         if terms:
             model.add(var >= teacher.min_two_week_workload)
             model.add(var <= teacher.max_two_week_workload)
-
-    return workloads

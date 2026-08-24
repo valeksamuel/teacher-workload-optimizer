@@ -2,6 +2,7 @@ import pandas as pd
 from ortools.sat.python import cp_model
 
 import constants as c
+from enums import Week
 from models import Lesson, Teacher
 
 
@@ -36,13 +37,20 @@ def build_lessons(lessons_df: pd.DataFrame) -> list[Lesson]:
     for _, row in lessons_df.iterrows():
         fixed_teacher = row[c.COL_SUBJECT_TEACHER]
 
+        if row[c.COL_LESSON_WEEK] == c.WEEK_TYPE_EVEN:
+            week_type = Week.EVEN
+        elif row[c.COL_LESSON_WEEK] == c.WEEK_TYPE_ODD:
+            week_type = Week.ODD
+        elif row[c.COL_LESSON_WEEK] == c.WEEK_TYPE_EVERY:
+            week_type = Week.EVERY
+
         lessons.append(
             Lesson(
                 id=row[c.COL_LESSON_ID],
                 class_name=row[c.COL_CLASS_NAME],
                 name=row[c.COL_LESSON_NAME],
                 two_week_hours=row[c.COL_LESSON_WEEKLY_LOAD],
-                week=row[c.COL_LESSON_WEEK],
+                week=week_type,
                 assigned_teacher=fixed_teacher if pd.notna(fixed_teacher) else None,
             )
         )
