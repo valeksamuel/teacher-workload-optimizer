@@ -1,7 +1,7 @@
 {
     "load.info": "📂 Načítavam: {path}",
-    "lessons.info": "Hodiny: {len(lessons_df)} záznamov",
-    "teachers.info": "Učitelia: {len(teachers_df)} záznamov",
+    "lessons.info": "Hodiny: {count_lessons} záznamov",
+    "teachers.info": "Učitelia: {count_teachers} záznamov",
     "cli.description": "Optimalizátor úväzkov učiteľov",
     "cli.input.help": "Vstupný Excel súbor (default: input.xlsx)",
     "cli.output.help": "Výstupný Excel súbor (default: output.xlsx)",
@@ -23,6 +23,7 @@
     "excel.col.min.2week.workload": "Min úväzok (2 týždňový)",
     "excel.col.target.2week.workload": "Cieľový úväzok (2 týždňový)",
     "excel.col.max.2week.workload": "Max úväzok (2 týždňový)",
-    "constraints.infeasible.lessons": "{len(infeasible)} hodín bez premennej - model môže byť neriešiteľný!",
-    "constraints.infeasible.lessons.list": "Problémové ID hodín: {infeasible}"
+    "constraints.infeasible.lessons": "{count_infeasible} hodín bez premennej - model môže byť neriešiteľný!",
+    "constraints.infeasible.lessons.list": "Problémové ID hodín: {lessons_infeasible}",
+    "constraints.fixed.assignment.not.valid": "Neplatné pevné priradenie: {lesson_id} → {teacher_id} (učiteľ nemá aprobáciu alebo neexistuje)."
 }

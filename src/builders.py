@@ -1,4 +1,5 @@
 import pandas as pd
+from ortools.sat.python import cp_model
 
 import constants as c
 from models import Lesson, Teacher
@@ -56,10 +57,24 @@ def build_eligibility(
     eligibility: dict[str, list[str]] = {}
     for lesson in lessons:
         eligible = [
-            teacher.name
+            teacher.id
             for teacher in teachers
             if teacher.is_qualified_for(lesson.get_subject_abbreviation)
         ]
         eligibility[lesson.id] = eligible
 
     return eligibility
+
+
+def build_assignment_vars(
+    model: cp_model.CpModel,
+    lessons: list[Lesson],
+    eligibility: dict[str, list[str]],
+) -> dict[tuple[str, str], cp_model.BoolVar]:
+    assignment_vars: dict[tuple[str, str], cp_model.BoolVar] = {}
+    for lesson in lessons:
+        for teacher_id in eligibility[lesson.id]:
+            var_name = f"assign_{lesson.id}_{teacher_id}"
+            assignment_vars[(lesson.id, teacher_id)] = model.new_bool_var(var_name)
+
+    return assignment_vars

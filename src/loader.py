@@ -21,7 +21,7 @@ def load_data(file_path: str) -> tuple[pd.DataFrame, pd.DataFrame]:
         [col for col in teachers_df.columns if not str(col).startswith("Unnamed")]
     ]
 
-    print(translate("lessons.info", len=len(lessons_df)))
-    print(translate("teachers.info", len=len(teachers_df)))
+    print(translate("lessons.info", count_lessons=len(lessons_df)))
+    print(translate("teachers.info", count_teachers=len(teachers_df)))
 
     return pd.DataFrame(lessons_df), pd.DataFrame(teachers_df)
