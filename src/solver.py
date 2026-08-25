@@ -28,9 +28,11 @@ def build_and_solve(
 
     add_one_teacher_per_lesson(model, assignment_vars, lessons, eligibility)
     add_fixed_assignments(model, assignment_vars, lessons)
-    add_workload_limits(model, lessons, teachers, assignment_vars)
+    workload_vars = add_workload_limits(model, lessons, teachers, assignment_vars)
 
-    objective_terms = build_objective(model, assignment_vars, lessons, teachers)
+    objective_terms = build_objective(
+        model, assignment_vars, workload_vars, lessons, teachers
+    )
 
     model.minimize(sum(objective_terms))
 
@@ -53,6 +55,7 @@ def build_and_solve(
 def phase1_objective(
     model: cp_model.CpModel,
     assignment_vars: dict[tuple[str, str], cp_model.IntVar],
+    workload_vars: dict[str, cp_model.IntVar],
     lessons: list[Lesson],
     teachers: list[Teacher],
 ) -> list[cp_model.IntVar]:
@@ -63,11 +66,8 @@ def phase1_objective(
             teacher.max_two_week_workload - teacher.min_two_week_workload,
             f"ph1_dev_{teacher.id}",
         )
-        assert teacher.workload_var is not None, (
-            "Workload variable should be set for each teacher."
-        )
         model.add_abs_equality(
-            deviation, teacher.workload_var - teacher.target_two_week_workload
+            deviation, workload_vars[teacher.id] - teacher.target_two_week_workload
         )
         deviations.append(deviation)
 
@@ -77,6 +77,7 @@ def phase1_objective(
 def phase2_objective(
     model: cp_model.CpModel,
     assignment_vars: dict[tuple[str, str], cp_model.IntVar],
+    workload_vars: dict[str, cp_model.IntVar],
     lessons: list[Lesson],
     teachers: list[Teacher],
 ) -> list[cp_model.IntVar]:
@@ -99,21 +100,21 @@ def phase2_objective(
                 even_terms.append(var * lesson.two_week_hours)
                 odd_terms.append(var * lesson.two_week_hours)
 
-            even_var = model.new_int_var(
-                0, teacher.max_two_week_workload, f"ph2_even_{teacher.id}"
-            )
-            odd_var = model.new_int_var(
-                0, teacher.max_two_week_workload, f"ph2_odd_{teacher.id}"
-            )
-            diff = model.new_int_var(
-                0, teacher.max_two_week_workload, f"ph2_diff_{teacher.id}"
-            )
+        even_var = model.new_int_var(
+            0, teacher.max_two_week_workload, f"ph2_even_{teacher.id}"
+        )
+        odd_var = model.new_int_var(
+            0, teacher.max_two_week_workload, f"ph2_odd_{teacher.id}"
+        )
+        diff = model.new_int_var(
+            0, teacher.max_two_week_workload, f"ph2_diff_{teacher.id}"
+        )
 
-            model.add(even_var == (sum(even_terms) if even_terms else 0))
-            model.add(odd_var == (sum(odd_terms) if odd_terms else 0))
-            model.add_abs_equality(diff, even_var - odd_var)
+        model.add(even_var == (sum(even_terms) if even_terms else 0))
+        model.add(odd_var == (sum(odd_terms) if odd_terms else 0))
+        model.add_abs_equality(diff, even_var - odd_var)
 
-            imbalances.append(diff)
+        imbalances.append(diff)
 
     return imbalances
 

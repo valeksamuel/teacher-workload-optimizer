@@ -9,13 +9,16 @@ from models import Lesson, Teacher
 def build_teachers(teachers_df: pd.DataFrame) -> list[Teacher]:
     # TODO in check_data: Check if any cell in teachers_df is empty (pd.notna)
     # TODO in check_data: Check if any teacher has negative values
+    # TODO in check_data: Check if any teacher has min > target > max workload
 
     subject_cols = [col for col in teachers_df.columns if col not in c.INFO_COLS]
 
     teachers: list[Teacher] = []
     for _, row in teachers_df.iterrows():
         qualifications = {
-            subject for subject in subject_cols if subject in row and bool(row[subject])
+            subject
+            for subject in subject_cols
+            if subject in row and pd.notna(row[subject]) and bool(row[subject])
         }
 
         teachers.append(
@@ -35,7 +38,7 @@ def build_teachers(teachers_df: pd.DataFrame) -> list[Teacher]:
 def build_lessons(lessons_df: pd.DataFrame) -> list[Lesson]:
     lessons: list[Lesson] = []
     for _, row in lessons_df.iterrows():
-        fixed_teacher = row[c.COL_SUBJECT_TEACHER]
+        fixed_teacher_id = row[c.COL_SUBJECT_TEACHER]
 
         if row[c.COL_LESSON_WEEK] == c.WEEK_TYPE_EVEN:
             week_type = Week.EVEN
@@ -49,9 +52,11 @@ def build_lessons(lessons_df: pd.DataFrame) -> list[Lesson]:
                 id=row[c.COL_LESSON_ID],
                 class_name=row[c.COL_CLASS_NAME],
                 name=row[c.COL_LESSON_NAME],
-                two_week_hours=row[c.COL_LESSON_WEEKLY_LOAD],
+                two_week_hours=int(row[c.COL_LESSON_WEEKLY_LOAD]),
                 week=week_type,
-                assigned_teacher=fixed_teacher if pd.notna(fixed_teacher) else None,
+                assigned_teacher_id=fixed_teacher_id
+                if pd.notna(fixed_teacher_id)
+                else None,
             )
         )
 

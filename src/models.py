@@ -1,7 +1,5 @@
 from dataclasses import dataclass, field
 
-from ortools.sat.python import cp_model
-
 from enums import Week
 
 
@@ -13,7 +11,7 @@ class Lesson:
     class_name: str
     two_week_hours: int
     week: Week
-    assigned_teacher: Teacher | None = None
+    assigned_teacher_id: str | None = None
 
     @property
     def get_subject_abbreviation(self) -> str:
@@ -28,7 +26,6 @@ class Teacher:
     target_two_week_workload: int
     max_two_week_workload: int
     subject_qualifications: set[str] = field(default_factory=set)
-    workload_var: cp_model.IntVar | None = None
 
     def is_qualified_for(self, subject: str) -> bool:
         return subject in self.subject_qualifications

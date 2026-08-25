@@ -46,16 +46,16 @@ def add_fixed_assignments(
     """Constraint: fixed teacher assignments."""
     # TODO in check_data: Check if fixed teacher is eligible for the lesson
     for lesson in lessons:
-        fixed_teacher = lesson.assigned_teacher
-        if fixed_teacher is not None:
-            if (lesson.id, fixed_teacher.id) in assignment_vars:
-                model.add(assignment_vars[(lesson.id, fixed_teacher.id)] == 1)
+        fixed_teacher_id = lesson.assigned_teacher_id
+        if fixed_teacher_id is not None:
+            if (lesson.id, fixed_teacher_id) in assignment_vars:
+                model.add(assignment_vars[(lesson.id, fixed_teacher_id)] == 1)
             else:
                 print(
                     translate(
                         "constraints.fixed.assignment.not.valid",
                         lesson_id=lesson.id,
-                        teacher_id=fixed_teacher.id,
+                        teacher_id=fixed_teacher_id,
                     )
                 )
 
@@ -65,8 +65,9 @@ def add_workload_limits(
     lessons: list[Lesson],
     teachers: list[Teacher],
     assignment_vars: dict[tuple[str, str], cp_model.IntVar],
-) -> None:
+) -> dict[str, cp_model.IntVar]:
     """Constraint: min and max workload limits."""
+    workload_vars: dict[str, cp_model.IntVar] = {}
     for teacher in teachers:
         terms = []
         for lesson in lessons:
@@ -76,14 +77,13 @@ def add_workload_limits(
                 )
 
         var = model.new_int_var(
-            teacher.min_two_week_workload,
-            teacher.max_two_week_workload,
-            f"workload_{teacher.id}",
+            0, teacher.max_two_week_workload, f"workload_{teacher.id}"
         )
-
         model.add(var == (sum(terms) if terms else 0))
-        teacher.workload_var = var
+        workload_vars[teacher.id] = var
 
         if terms:
             model.add(var >= teacher.min_two_week_workload)
             model.add(var <= teacher.max_two_week_workload)
+
+    return workload_vars
