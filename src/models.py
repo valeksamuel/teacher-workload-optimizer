@@ -28,7 +28,7 @@ class Teacher:
     target_two_week_workload: int
     max_two_week_workload: int
     subject_qualifications: set[str] = field(default_factory=set)
-    workload_var: cp_model.IntVar
+    workload_var: cp_model.IntVar | None = None
 
     def is_qualified_for(self, subject: str) -> bool:
         return subject in self.subject_qualifications
@@ -37,4 +37,4 @@ class Teacher:
 @dataclass
 class PhaseResult:
     assignment_vars_vals: dict[tuple[str, str], int]
-    objective_value: int
+    objective_value: float

@@ -6,7 +6,7 @@ from models import Lesson, Teacher
 
 def add_one_teacher_per_lesson(
     model: cp_model.CpModel,
-    assignment_vars: dict[tuple[str, str], cp_model.BoolVar],
+    assignment_vars: dict[tuple[str, str], cp_model.IntVar],
     lessons: list[Lesson],
     eligibility: dict[str, list[str]],
 ) -> None:
@@ -40,7 +40,7 @@ def add_one_teacher_per_lesson(
 
 def add_fixed_assignments(
     model: cp_model.CpModel,
-    assignment_vars: dict[tuple[str, str], cp_model.BoolVar],
+    assignment_vars: dict[tuple[str, str], cp_model.IntVar],
     lessons: list[Lesson],
 ) -> None:
     """Constraint: fixed teacher assignments."""
@@ -64,7 +64,7 @@ def add_workload_limits(
     model: cp_model.CpModel,
     lessons: list[Lesson],
     teachers: list[Teacher],
-    assignment_vars: dict[tuple[str, str], cp_model.BoolVar],
+    assignment_vars: dict[tuple[str, str], cp_model.IntVar],
 ) -> None:
     """Constraint: min and max workload limits."""
     for teacher in teachers:
@@ -81,7 +81,7 @@ def add_workload_limits(
             f"workload_{teacher.id}",
         )
 
-        model.add(var == sum(terms) if terms else 0)
+        model.add(var == (sum(terms) if terms else 0))
         teacher.workload_var = var
 
         if terms:

@@ -52,7 +52,7 @@ def build_and_solve(
 
 def phase1_objective(
     model: cp_model.CpModel,
-    assignment_vars: dict[tuple[str, str], cp_model.BoolVar],
+    assignment_vars: dict[tuple[str, str], cp_model.IntVar],
     lessons: list[Lesson],
     teachers: list[Teacher],
 ) -> list[cp_model.IntVar]:
@@ -62,6 +62,9 @@ def phase1_objective(
             0,
             teacher.max_two_week_workload - teacher.min_two_week_workload,
             f"ph1_dev_{teacher.id}",
+        )
+        assert teacher.workload_var is not None, (
+            "Workload variable should be set for each teacher."
         )
         model.add_abs_equality(
             deviation, teacher.workload_var - teacher.target_two_week_workload
@@ -73,7 +76,7 @@ def phase1_objective(
 
 def phase2_objective(
     model: cp_model.CpModel,
-    assignment_vars: dict[tuple[str, str], cp_model.BoolVar],
+    assignment_vars: dict[tuple[str, str], cp_model.IntVar],
     lessons: list[Lesson],
     teachers: list[Teacher],
 ) -> list[cp_model.IntVar]:
@@ -106,8 +109,8 @@ def phase2_objective(
                 0, teacher.max_two_week_workload, f"ph2_diff_{teacher.id}"
             )
 
-            model.add(even_var == sum(even_terms) if even_terms else 0)
-            model.add(odd_var == sum(odd_terms) if odd_terms else 0)
+            model.add(even_var == (sum(even_terms) if even_terms else 0))
+            model.add(odd_var == (sum(odd_terms) if odd_terms else 0))
             model.add_abs_equality(diff, even_var - odd_var)
 
             imbalances.append(diff)

@@ -41,7 +41,7 @@ def build_lessons(lessons_df: pd.DataFrame) -> list[Lesson]:
             week_type = Week.EVEN
         elif row[c.COL_LESSON_WEEK] == c.WEEK_TYPE_ODD:
             week_type = Week.ODD
-        elif row[c.COL_LESSON_WEEK] == c.WEEK_TYPE_EVERY:
+        else:
             week_type = Week.EVERY
 
         lessons.append(
@@ -78,8 +78,8 @@ def build_assignment_vars(
     model: cp_model.CpModel,
     lessons: list[Lesson],
     eligibility: dict[str, list[str]],
-) -> dict[tuple[str, str], cp_model.BoolVar]:
-    assignment_vars: dict[tuple[str, str], cp_model.BoolVar] = {}
+) -> dict[tuple[str, str], cp_model.IntVar]:
+    assignment_vars: dict[tuple[str, str], cp_model.IntVar] = {}
     for lesson in lessons:
         for teacher_id in eligibility[lesson.id]:
             var_name = f"assign_{lesson.id}_{teacher_id}"
