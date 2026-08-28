@@ -21,3 +21,15 @@ INFO_COLS = {
 WEEK_TYPE_EVEN = translate("week.type.even")
 WEEK_TYPE_ODD = translate("week.type.odd")
 WEEK_TYPE_EVERY = translate("week.type.every")
+
+# Console printing - adjust column widths and alignment for better readability
+SEPARATOR = "─" * 62
+CONSOLE_COLS = [
+    (translate("console.col.teacher"), 30, "<"),
+    (translate("console.col.workload"), 7, ">"),
+    (translate("console.col.target"), 5, ">"),
+    (translate("console.col.deviation"), 6, ">"),
+    (translate("console.col.even"), 7, ">"),
+    (translate("console.col.odd"), 7, ">"),
+    (translate("console.col.e.o.diff"), 6, ">"),
+]

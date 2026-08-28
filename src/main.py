@@ -1,10 +1,13 @@
 import argparse
 import sys
 
+import constants as c
 from builders import build_eligibility, build_lessons, build_teachers
+from console_report import print_phase_comparison, print_phase_stats
 from i18n import translate
 from loader import load_data
 from solver import build_and_solve, phase1_objective, phase2_objective
+from stats import build_stats, extract_assignments
 
 
 def main() -> None:
@@ -32,16 +35,16 @@ def main() -> None:
     teachers = build_teachers(teachers_df)
     eligibility = build_eligibility(lessons, teachers)
 
-    print("\n" + "═" * 62)
+    print("\n" + c.SEPARATOR)
     print(translate("phase1.start"))
-    print("═" * 62)
+    print(c.SEPARATOR)
 
     result_ph1 = build_and_solve(
         lessons,
         teachers,
         eligibility,
         prefix="ph1_",
-        phase_label="Fáza 1",
+        phase_label=translate("phase1.label"),
         build_objective=phase1_objective,
         time_limit=args.time,
         num_workers=args.workers,
@@ -52,16 +55,22 @@ def main() -> None:
 
     print(translate("phase1.complete", obj_value=int(result_ph1.objective_value)))
 
-    print("\n" + "═" * 62)
+    assignments1, total_wl1, even_wl1, odd_wl1 = extract_assignments(
+        lessons, result_ph1.assignment_vars_vals
+    )
+    stats1 = build_stats(teachers, total_wl1, even_wl1, odd_wl1)
+    print_phase_stats(stats1, translate("phase1.stats.title"))
+
+    print("\n" + c.SEPARATOR)
     print(translate("phase2.start"))
-    print("═" * 62)
+    print(c.SEPARATOR)
 
     result_ph2 = build_and_solve(
         lessons,
         teachers,
         eligibility,
         prefix="ph2_",
-        phase_label="Fáza 2",
+        phase_label=translate("phase2.label"),
         build_objective=phase2_objective,
         time_limit=args.time,
         num_workers=args.workers,
@@ -73,6 +82,17 @@ def main() -> None:
         result_ph2 = result_ph1
 
     print(translate("phase2.complete", obj_value=int(result_ph2.objective_value)))
+
+    assignments2, total_wl2, even_wl2, odd_wl2 = extract_assignments(
+        lessons, result_ph2.assignment_vars_vals
+    )
+    stats2 = build_stats(teachers, total_wl2, even_wl2, odd_wl2)
+    print_phase_stats(stats2, translate("phase2.stats.title"))
+
+    print_phase_comparison(stats1, stats2)
+
+    # TODO and check if console export is OK (I removed in limits)
+    # export_to_excel(assignments1, assignments2)
 
 
 if __name__ == "__main__":

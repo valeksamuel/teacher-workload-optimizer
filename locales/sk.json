@@ -38,5 +38,19 @@
     "phase2.start": "FÁZA 2 - Minimalizácia rozdielu párnych/nepárnych týždňov",
     "phase2.complete": "Celková nerovnováha párneho/nepárneho týždňa: {obj_value} hodín",
     "phase1.infeasible": "Fáza 1 nenašla riešenie. Program sa ukončuje.",
-    "phase2.infeasible": "Fáza 2 nenašla riešenie - použijem výsledky fázy 1."
+    "phase2.infeasible": "Fáza 2 nenašla riešenie - použijem výsledky fázy 1.",
+    "phase1.label": "Fáza 1",
+    "phase2.label": "Fáza 2",
+    "console.col.teacher": "Učiteľ",
+    "console.col.workload": "Učiteľ",
+    "console.col.target": "Učiteľ",
+    "console.col.deviation": "Úväzok",
+    "console.col.even": "Párny",
+    "console.col.odd": "Nepárny",
+    "console.col.e.o.diff": "P-N",
+    "console.sum": "SÚČET",
+    "console.phase.comparison.header": "POROVNANIE FÁZA 1 vs FÁZA 2",
+    "console.phase.comparison.dev": "Celková odchýlka od cieľa: F1={total_dev_p1: 5.1f} -> F2={total_dev_p2: 5.1f}",
+    "console.phase.comparison.diff": "Celkový rozdiel párny/nepárny týždeň: F1={total_diff_p1:5.1f} -> F2={total_diff_p2:5.1f}",
+    "phase1.stats.title": "Fáza 1 - výsledok"
 }
