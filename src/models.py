@@ -11,7 +11,7 @@ class Lesson:
     class_name: str
     two_week_hours: int
     week: Week
-    assigned_teacher_id: str | None = None
+    pre_assigned_teacher_id: str | None = None
 
     @property
     def get_subject_abbreviation(self) -> str:
@@ -35,3 +35,19 @@ class Teacher:
 class PhaseResult:
     assignment_vars_vals: dict[tuple[str, str], int]
     objective_value: float
+
+
+@dataclass(slots=True, kw_only=True)
+class Assignment:
+    lesson: Lesson
+    assigned_teacher_id: str | None
+
+
+@dataclass(slots=True, kw_only=True)
+class TeacherStat:
+    teacher: Teacher
+    total_workload: int
+    even_workload: int
+    odd_workload: int
+    target_deviation: int
+    even_odd_diff: int

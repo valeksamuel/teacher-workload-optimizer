@@ -46,7 +46,7 @@ def add_fixed_assignments(
     """Constraint: fixed teacher assignments."""
     # TODO in check_data: Check if fixed teacher is eligible for the lesson
     for lesson in lessons:
-        fixed_teacher_id = lesson.assigned_teacher_id
+        fixed_teacher_id = lesson.pre_assigned_teacher_id
         if fixed_teacher_id is not None:
             if (lesson.id, fixed_teacher_id) in assignment_vars:
                 model.add(assignment_vars[(lesson.id, fixed_teacher_id)] == 1)

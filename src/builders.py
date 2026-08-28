@@ -54,7 +54,7 @@ def build_lessons(lessons_df: pd.DataFrame) -> list[Lesson]:
                 name=row[c.COL_LESSON_NAME],
                 two_week_hours=int(row[c.COL_LESSON_WEEKLY_LOAD]),
                 week=week_type,
-                assigned_teacher_id=fixed_teacher_id
+                pre_assigned_teacher_id=fixed_teacher_id
                 if pd.notna(fixed_teacher_id)
                 else None,
             )
