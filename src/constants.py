@@ -37,13 +37,23 @@ CONSOLE_COLS = [
 ]
 
 # Excel output
-LABELS = [
+LABELS_SHEET_ASSIGNMENTS = [
     translate("excel.label.id"),
     translate("excel.label.class"),
     translate("excel.label.subject"),
     translate("excel.label.2week.workload"),
     translate("excel.label.week"),
     translate("excel.label.teacher"),
+]
+LABELS_SHEET_TEACHERS = [
+    translate("excel.label.min"),
+    translate("excel.label.target"),
+    translate("excel.label.max"),
+    translate("excel.label.total.workload"),
+    translate("excel.label.even.week"),
+    translate("excel.label.odd.week"),
+    translate("excel.label.deviation"),
+    translate("excel.label.difference"),
 ]
 HDR_FILL = PatternFill("solid", fgColor="1F3864")  # dark blue - header
 HDR_FONT = Font(bold=True, color="FFFFFF", name="Arial")

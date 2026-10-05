@@ -8,6 +8,7 @@ from i18n import translate
 from loader import load_data
 from solver import build_and_solve, phase1_objective, phase2_objective
 from stats import build_stats, extract_assignments
+from xlsx_output import export_to_excel
 
 
 def main() -> None:
@@ -92,8 +93,15 @@ def main() -> None:
 
     print_phase_comparison(stats1, stats2)
 
-    # TODO and check if console export is OK (I removed in limits)
-    # export_to_excel(assignments1, assignments2)
+    # TODO: bug fix, check if console export is OK (I removed in limits), check xlsx exp
+    export_to_excel(
+        output_path=args.output,
+        assignments1=assignments1,
+        stats1=stats1,
+        assignments2=assignments2,
+        stats2=stats2,
+        teachers_by_id=teachers_by_id,
+    )
 
 
 if __name__ == "__main__":

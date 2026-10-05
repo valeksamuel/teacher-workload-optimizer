@@ -69,5 +69,20 @@
     "excel.legend.even": "Párny týždeň",
     "excel.legend.odd": "Nepárny týždeň",
     "excel.legend.every": "Každý týždeň",
-    "excel.legend.not.assigned": "NEPRIRADENÝ"
+    "excel.legend.not.assigned": "NEPRIRADENÝ",
+    "excel.sheet.teachers.title": "Fáza {phase_num} - Učitelia",
+    "excel.label.min": "Min",
+    "excel.label.target": "Cieľ",
+    "excel.label.max": "Max",
+    "excel.label.total.workload": "Celkový úväzok",
+    "excel.label.even.week": "Párny týždeň",
+    "excel.label.odd.week": "Nepárny týždeň",
+    "excel.label.deviation": "Odchýlka od cieľa",
+    "excel.label.difference": "Rozdiel P-N",
+    "summary.sum": "SÚČET",
+    "summary.sum.value": "=SUM(E3:E{r_sum - 1})",
+    "excel.legend.text.ok": "V limite, odchýlka ≤ 2 h",
+    "excel.legend.text.warn": "V limite, odchýlka 3-5 h",
+    "excel.legend.text.alt": "V limite, odchýlka > 5 h",
+    "excel.legend.text.err": "Mimo limitu!"
 }
