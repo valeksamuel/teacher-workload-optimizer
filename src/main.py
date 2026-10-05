@@ -33,6 +33,7 @@ def main() -> None:
     lessons_df, teachers_df = load_data(args.input)
     lessons = build_lessons(lessons_df)
     teachers = build_teachers(teachers_df)
+    teachers_by_id = {teacher.id: teacher for teacher in teachers}
     eligibility = build_eligibility(lessons, teachers)
 
     print("\n" + c.SEPARATOR)

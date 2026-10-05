@@ -1,3 +1,5 @@
+from openpyxl.styles import Font, PatternFill
+
 from i18n import translate
 
 COL_LESSON_ID = translate("excel.col.lesson.id")
@@ -33,3 +35,26 @@ CONSOLE_COLS = [
     (translate("console.col.odd"), 7, ">"),
     (translate("console.col.e.o.diff"), 6, ">"),
 ]
+
+# Excel output
+LABELS = [
+    translate("excel.label.id"),
+    translate("excel.label.class"),
+    translate("excel.label.subject"),
+    translate("excel.label.2week.workload"),
+    translate("excel.label.week"),
+    translate("excel.label.teacher"),
+]
+HDR_FILL = PatternFill("solid", fgColor="1F3864")  # dark blue - header
+HDR_FONT = Font(bold=True, color="FFFFFF", name="Arial")
+ALT_FILL = PatternFill("solid", fgColor="EEF2F7")  # light blue - even rows
+OK_FILL = PatternFill("solid", fgColor="D6EAD6")  # green - in limit
+WARN_FILL = PatternFill("solid", fgColor="FFF3CD")  # yellow - slight deviation
+ERR_FILL = PatternFill("solid", fgColor="FADADD")  # red - out of limit
+BLUE_FILL = PatternFill("solid", fgColor="D1E8F5")  # blue - even week
+GOLD_FILL = PatternFill("solid", fgColor="FFF0B3")  # gold - odd week
+GRN_FILL = PatternFill("solid", fgColor="E0F5E0")  # light green - every week
+TITLE_ROW = PatternFill("solid", fgColor="2E4057")
+TITLE_FNT = Font(bold=True, color="FFFFFF", size=12, name="Arial")
+BOLD = Font(bold=True, name="Arial")
+NORM = Font(name="Arial")
