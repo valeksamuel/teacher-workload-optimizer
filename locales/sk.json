@@ -52,5 +52,10 @@
     "console.phase.comparison.header": "POROVNANIE FÁZA 1 vs FÁZA 2",
     "console.phase.comparison.dev": "Celková odchýlka od cieľa: F1={total_dev_p1: 5.1f} -> F2={total_dev_p2: 5.1f}",
     "console.phase.comparison.diff": "Celkový rozdiel párny/nepárny týždeň: F1={total_diff_p1:5.1f} -> F2={total_diff_p2:5.1f}",
-    "phase1.stats.title": "Fáza 1 - výsledok"
+    "phase1.stats.title": "Fáza 1 - výsledok",
+    "excel.sheet1.title": "Fáza 1 - Priradenia učiteľov | Optimalizácia celkového úväzku",
+    "excel.sheet2.title": "Fáza 1 - Prehľad úväzkov | Minimalizácia odchýlky od cieľa",
+    "excel.sheet3.title": "Fáza 2 - Priradenia učiteľov | Minimalizácia P-N rozdielu",
+    "excel.sheet4.title": "Fáza 2 - Prehľad úväzkov | Minimalizácia P-N rozdielu",
+    "excel.export.complete": "Výsledky uložené: {output_path}"
 }
