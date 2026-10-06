@@ -62,11 +62,9 @@ def sheet_assignments(
         ws.cell(r, 6, teachers_by_id[a.assigned_teacher_id].name)
         ws.cell(r, 4).alignment = Alignment(horizontal="center")
 
-        if a.assigned_teacher_id is None:
-            fill = c.ERR_FILL
-        elif a.assigned_teacher_id == Week.EVEN:
+        if a.lesson.week == Week.EVEN:
             fill = c.BLUE_FILL
-        elif a.assigned_teacher_id == Week.ODD:
+        elif a.lesson.week == Week.ODD:
             fill = c.GOLD_FILL
         else:
             fill = c.GRN_FILL
@@ -127,7 +125,7 @@ def sheet_teachers(
     for i, s in enumerate(stats):
         r = i + 3
         vals = [
-            s.teacher,
+            s.teacher.name,
             s.teacher.min_two_week_workload,
             s.teacher.target_two_week_workload,
             s.teacher.max_two_week_workload,
