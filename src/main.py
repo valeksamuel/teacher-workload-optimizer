@@ -93,7 +93,7 @@ def main() -> None:
 
     print_phase_comparison(stats1, stats2)
 
-    # TODO: bug fix, check if console export is OK (I removed in limits), check xlsx exp
+    # TODO: bug fix, check if console export is OK (I removed in limits), check xlsx exp, refactor based on new input .xlsx and there are errors and tips from claude
     export_to_excel(
         output_path=args.output,
         assignments1=assignments1,
